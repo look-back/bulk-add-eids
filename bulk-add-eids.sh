@@ -81,7 +81,7 @@ while IFS=',' read -r email eid_value; do
 		echo -e "skip $i, because external id for $email exists\n"
 	fi
   
-done <"$input_file"
+done < <(sed -r 's/\r//g;s/^\s*//g;s/\s*,\s*/,/g;s/\s*$//g' "$input_file")
 end_ts=$(date +%s)
 duration=$((end_ts - start_ts))
 rate=0
